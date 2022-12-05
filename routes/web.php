@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Fondend\HomeController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,16 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/',[HomeController::class, 'index'])->name('home');
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('backend.dashboard.index');
-    })->name('dashboard');
+    ])->group(function () {
+        Route::get('/dashboard', function () {
+            return view('backend.dashboard.index');
+        })->name('dashboard');
+        Route::get('/category/create',[CategoryController::class,'create'])->name('create');
+        Route::post('/category/store', [CategoryController::class, 'store'])->name('store');
 });
