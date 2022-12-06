@@ -2,10 +2,18 @@
 @section('title','Add category')
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center mt-5">
             <div class="col-md-8">
-                <h1>Category Add <span>{{ Session::get('msg') }}</span></h1>
-                <form action="{{route('store')}}" method="POST">
+                {{-- <span>{{ Session::get('msg') }}</span> --}}
+                <h1>Category Add </h1>
+                <script>
+                    var msg = '{{Session::get('msg')}}';
+                    var exist = '{{Session::has('msg')}}';
+                    if(exist){
+                    alert(msg);
+                    }
+                </script>
+                <form action="{{route('category-store')}}" method="POST">
                     @csrf
                     <div class="mb-3">
                       <label for="name" class="form-label">Add Category</label>

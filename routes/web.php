@@ -26,6 +26,14 @@ Route::middleware([
         Route::get('/dashboard', function () {
             return view('backend.dashboard.index');
         })->name('dashboard');
-        Route::get('/category/create',[CategoryController::class,'create'])->name('create');
-        Route::post('/category/store', [CategoryController::class, 'store'])->name('store');
+
+        Route::controller(CategoryController::class)->group(function(){
+            Route::get('/category/create','create')->name('category-create');
+            Route::post('/category/store', 'store')->name('category-store');
+            Route::get('/categories','index')->name('category-manage');
+            Route::get('/category/delete/{cat_id}',  'delete')->name('category-delete');
+            Route::get('/category/edit/{cat_id}',  'edit')->name('category-edit');
+            Route::post('/category/update/{cat_id}',  'update')->name('category-update');
+        });
+        
 });
