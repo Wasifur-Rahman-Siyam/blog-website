@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -40,6 +41,7 @@ class CategoryController extends Controller
     public function delete($cat_id) {
         $category = Category::find($cat_id);
         $category->delete();
+        DB::table('brands')->where('category_id', $cat_id)->delete();
         return redirect()->back()->with('msg', 'Category deleted Successfully');
     }
 }

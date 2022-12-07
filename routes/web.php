@@ -35,6 +35,7 @@ Route::middleware([
             Route::get('/categories','index')->name('category-manage');
             Route::get('/category/delete/{cat_id}',  'delete')->name('category-delete');
             Route::get('/category/edit/{cat_id}',  'edit')->name('category-edit');
+            Route::post('/category/update/{cat_id}',  'update')->name('category-update');
             
         });
         Route::controller(BrandController::class)->group(function(){
