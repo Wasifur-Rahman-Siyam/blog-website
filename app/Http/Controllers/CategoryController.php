@@ -19,7 +19,9 @@ class CategoryController extends Controller
     public function store(Request $request) {
 
         $request->validate([
-            'name' => 'max:40'
+            'name' => 'required|max:40'
+        ],[
+            'name.required' => 'The Category field is required.'
         ]);
         $category = new Category();
         $category->name = $request->name;
@@ -32,6 +34,11 @@ class CategoryController extends Controller
         return view('backend.category.edit', compact('category'));
     }
     public function update(Request $request, $cat_id) {
+        $request->validate([
+            'name' => 'required|max:40'
+        ],[
+            'name.required' => 'The Category field is required.'
+        ]);
         $category = Category::find($cat_id);
         $category->name = $request->name;
         $category->save();

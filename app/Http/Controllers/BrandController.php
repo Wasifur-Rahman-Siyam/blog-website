@@ -19,7 +19,11 @@ class BrandController extends Controller
     }
     public function store(Request $request) {
         $request->validate([
-            'name' => 'max:40'
+            'category_id'   => 'required',
+            'name'          => 'required|max:40'
+        ],[
+            'category_id.required'  => 'The category field is required',
+            'name.required'         => 'The Brand field is required.'
         ]);
         $brand = new Brand();
         $brand->category_id = $request->category_id;
@@ -34,6 +38,13 @@ class BrandController extends Controller
         return view('backend.brand.edit', compact(['brand','category','categories']));
     }
     public function update(Request $request, $brand_id) {
+        $request->validate([
+            'category_id'   => 'required',
+            'name'          => 'required|max:40'
+        ],[
+            'category_id.required'  => 'The category field is required',
+            'name.required'         => 'The Brand field is required.'
+        ]);
         $brand = Brand::find($brand_id);
         $brand->category_id = $request->category_id;
         $brand->name = $request->name;

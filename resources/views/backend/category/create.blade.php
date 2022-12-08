@@ -10,7 +10,8 @@
                     var msg = '{{Session::get('msg')}}';
                     var exist = '{{Session::has('msg')}}';
                     if(exist){
-                    alert(msg);
+                    alert(msg); 
+                    '{{Session::forget('msg')}}'
                     }
                 </script>
                 <form action="{{route('category-store')}}" method="POST">
@@ -19,6 +20,11 @@
                       <label for="name" class="form-label">Add Category</label>
                       <input type="text" class="form-control" id="name" name="name">
                     </div>
+                    @error("name")
+                        <div>
+                            <span class="text-danger">{{ $message }}</span>
+                        </div>
+                    @enderror
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
             </div>

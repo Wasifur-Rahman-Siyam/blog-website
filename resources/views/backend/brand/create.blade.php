@@ -15,15 +15,25 @@
                 <form action="{{route('brand-store')}}" method="POST">
                     @csrf
                     <select class="form-select" aria-label="Default select example" name="category_id">
-                        <option selected>Select Category</option>
+                        <option selected value=''>Select Category</option>
                         @foreach ($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
                         @endforeach
                       </select>
+                    @error("category_id")
+                        <div>
+                            <span class="text-danger">{{ $message }}</span>
+                        </div>
+                    @enderror
                     <div class="mb-3">
                       <label for="name" class="form-label">Add Brand</label>
                       <input type="text" class="form-control" id="name" name="name">
                     </div>
+                    @error("name")
+                        <div>
+                            <span class="text-danger">{{ $message }}</span>
+                        </div>
+                    @enderror
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
             </div>

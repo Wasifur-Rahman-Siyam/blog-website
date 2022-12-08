@@ -11,6 +11,11 @@
                       <label for="name" class="form-label">Add Category</label>
                       <input type="text" class="form-control" id="name" name="name" value='{{$category->name}}'>
                     </div>
+                    @error("name")
+                        <div>
+                            <span class="text-danger">{{ $message }}</span>
+                        </div>
+                    @enderror
                     <button type="submit" class="btn btn-primary">Update</button>
                   </form>
             </div>
