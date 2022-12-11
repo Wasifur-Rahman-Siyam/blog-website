@@ -49,6 +49,7 @@ class CategoryController extends Controller
         $category = Category::find($cat_id);
         $category->delete();
         DB::table('brands')->where('category_id', $cat_id)->delete();
+        DB::table('products')->where('category_id', $cat_id)->delete();
         return redirect()->back()->with('msg', 'Category deleted Successfully');
     }
 }

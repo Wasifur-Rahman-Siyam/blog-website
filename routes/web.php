@@ -21,6 +21,7 @@ use Laravel\Jetstream\Rules\Role;
 */
 
 Route::get('/',[HomeController::class, 'index'])->name('home');
+Route::get('/all-product',[ProductController::class, 'allProduct'])->name('all-product');
 
 Route::middleware([
     'auth:sanctum',
@@ -52,5 +53,6 @@ Route::middleware([
             Route::get('/product/create','create')->name('product-create');
             Route::post('/product/store','store')->name('product-store');
             Route::get('/product','index')->name('product-manage');
+            Route::get('/product/delete/{product_id}','delete')->name('product-delete');
         });
 });

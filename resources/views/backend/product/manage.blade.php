@@ -18,6 +18,7 @@
                                 <th>Product name</th>
                                 <th>Product price</th>
                                 <th>Product description</th>
+                                <th>Product Image</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -27,20 +28,22 @@
                                 <td>{{$loop->iteration}}</td>
                                 @foreach($categories as $category)
                                 @if($category->id == $product->category_id)
-                                <td>{{$category->name}}</td>
+                                <td style="width: 50px">{{$category->name}}</td>
                                 @endif
                                 @endforeach
                                 @foreach($brands as $brand)
                                 @if($brand->id == $product->brand_id)
-                                <td>{{$brand->name}}</td>
+                                <td style="width: 50px">{{$brand->name}}</td>
                                 @endif
                                 @endforeach
-                                <td>{{$product->name}}</td>
-                                <td>{{$product->price}}</td>
-                                <td>{{$product->description}}</td>
+                                <td style="width: 150px">{{$product->name}}</td>
+                                <td style="width: 50px">{{$product->price}}</td>
+                                <td style="width: 250px">{{$product->description}}</td>
+                                <td style="width: 100px"><img src="{{$product->image}}" alt="" style="width: 100px"></td>
                                 <td>
-                                    <a href="{{route('brand-edit', ['brand_id' => $brand->id,'cat_id' => $category->id])}}" class="btn btn-primary">Edit</a>
-                                    <a href="{{route('brand-delete', ['brand_id' => $brand->id])}}" class="btn btn-danger" onclick="return confirm('Are u sure delete this brand');">Delete</a>
+                                    <a href="{{route('brand-edit', ['brand_id' => $brand->id,'cat_id' => $category->id])}}" class="btn btn-success">Active</a>
+                                    <a href="{{route('brand-edit', ['brand_id' => $brand->id,'cat_id' => $category->id])}}" class="btn btn-warning">Edit</a>
+                                    <a href="{{route('product-delete', ['product_id' => $product->id])}}" class="btn btn-danger" onclick="return confirm('Are u sure delete this brand');">Delete</a>
                                 </td>
                             </tr>
                             @endforeach

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -54,6 +55,7 @@ class BrandController extends Controller
     public function delete($brand_id) {
         $brand = Brand::find($brand_id);
         $brand->delete();
+        DB::table('products')->where('brand_id', $brand_id)->delete();
         return redirect()->back()->with('msg', 'Brand deleted Successfully');
     }
 }

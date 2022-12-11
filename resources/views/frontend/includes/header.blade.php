@@ -72,7 +72,8 @@
                 </div> 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="{{route('home')}}">Home</a></li>
+                        <li><a href="{{route('home')}}">Home</a></li>
+                        <li><a href="{{route('all-product')}}">All product</a></li>
                         @foreach ($categories as  $category)
                         <li><a href="{{route('home')}}">{{$category->name}}</a></li>
                         @endforeach

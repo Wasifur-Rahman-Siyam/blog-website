@@ -74,13 +74,6 @@
                         <span class="text-danger">{{ $message }}</span>
                     </div>
                     @enderror
-                    <div class="row mt-2">
-                        <label class="col-md-4">Status</label>
-                        <div class="col-md-8">
-                            <label ><input type="radio" name="status" value="1" checked> Published</label>
-                            <label ><input type="radio" name="status" value="0"> Unpublished</label>
-                        </div>
-                    </div>
                     <button type="submit" class="btn btn-primary mt-4">Submit</button>
                   </form>
             </div>
