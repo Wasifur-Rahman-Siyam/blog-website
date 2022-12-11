@@ -3,9 +3,11 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Fondend\HomeController;
+use App\Http\Controllers\ProductController;
 use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use Laravel\Jetstream\Rules\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,5 +47,10 @@ Route::middleware([
             Route::get('/brand/delete/{brand_id}',  'delete')->name('brand-delete');
             Route::get('/brand/edit/{brand_id}/{cat_id}',  'edit')->name('brand-edit');
             Route::post('/brand/update/{brand_id}',  'update')->name('brand-update');
+        });
+        Route::controller(ProductController::class)->group(function() {
+            Route::get('/product/create','create')->name('product-create');
+            Route::post('/product/store','store')->name('product-store');
+            Route::get('/product','index')->name('product-manage');
         });
 });
