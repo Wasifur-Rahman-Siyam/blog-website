@@ -38,11 +38,11 @@
                                 @endforeach
                                 <td style="width: 150px">{{$product->name}}</td>
                                 <td style="width: 50px">{{$product->price}}</td>
-                                <td style="width: 250px">{{$product->description}}</td>
+                                <td style="width: 250px">{{Str::limit($product->description,100)}}</td>
                                 <td style="width: 100px"><img src="{{$product->image}}" alt="" style="width: 100px"></td>
                                 <td>
-                                    <a href="{{route('brand-edit', ['brand_id' => $brand->id,'cat_id' => $category->id])}}" class="btn btn-success">Active</a>
-                                    <a href="{{route('brand-edit', ['brand_id' => $brand->id,'cat_id' => $category->id])}}" class="btn btn-warning">Edit</a>
+                                    <a href="{{route('product-status', ['product_id' => $product->id])}}" class="{{$product->status == 1 ? 'btn btn-success' : 'btn btn-primary' }}">{{$product->status == 1 ? 'Active' : 'Deactive' }}</a>
+                                    <a href="{{route('product-edit', ['cat_id' => $category->id, 'brand_id' => $brand->id, 'product_id' =>  $product->id ])}}" class="btn btn-warning">Edit</a>
                                     <a href="{{route('product-delete', ['product_id' => $product->id])}}" class="btn btn-danger" onclick="return confirm('Are u sure delete this brand');">Delete</a>
                                 </td>
                             </tr>

@@ -15,7 +15,7 @@
                 <form action="{{route('product-store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <select class="form-select mb-4" aria-label="Default select example" name="category_id">
-                        <option selected value=''>Select Category</option>
+                        <option value='' disabled selected>Select Category</option>
                         @foreach ($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
                         @endforeach
@@ -26,7 +26,7 @@
                         </div>
                         @enderror
                       <select class="form-select mb-4" aria-label="Default select example" name="brand_id">
-                        <option selected value=''>Select Brand</option>
+                        <option selected value='' disabled selected>Select Brand</option>
                         @foreach ($brands as $brand)
                             <option value="{{$brand->id}}">{{$brand->name}}</option>
                         @endforeach

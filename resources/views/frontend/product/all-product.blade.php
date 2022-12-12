@@ -1,8 +1,20 @@
 @extends('frontend.frontend-master')
 
-@section('title','All product Page')
+@section('title', $title)
 
 @section('page')
+<div class="product-big-title-area">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="product-bit-title text-center">
+                  <h2>{{$title}}</h2>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
 <div class="single-product-area">
     <div class="zigzag-bottom"></div>
     <div class="container">
@@ -11,9 +23,9 @@
             <div class="col-md-3 col-sm-6">
                 <div class="single-shop-product">
                     <div class="product-upper">
-                        <img src="{{$product->image}}" alt="">
+                        <img src="{{asset('/')}}{{$product->image}}" alt="">
                     </div>
-                    <h2><a href="">{{$product->name}}</a></h2>
+                    <h2><a href="">{{Str::limit($product->name, 20) }}</a></h2>
                     <div class="product-carousel-price">
                         <ins>{{$product->price}}</ins>
                     </div> 

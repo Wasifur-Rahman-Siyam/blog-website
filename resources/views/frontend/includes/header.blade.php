@@ -75,7 +75,7 @@
                         <li><a href="{{route('home')}}">Home</a></li>
                         <li><a href="{{route('all-product')}}">All product</a></li>
                         @foreach ($categories as  $category)
-                        <li><a href="{{route('home')}}">{{$category->name}}</a></li>
+                        <li><a href="{{route('category-product',['cat_id' => $category->id])}}">{{$category->name}}</a></li>
                         @endforeach
                     </ul>
                 </div>  

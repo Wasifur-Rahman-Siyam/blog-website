@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\File; 
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,18 +15,27 @@ class ProductController extends Controller
         $brands = Brand::all();
         $categories = Category::all();
         $products = Product::all();
-        return view('backend.product.manage', compact(['brands', 'categories', 'products']));
+        return view('backend.product.manage', compact('brands', 'categories', 'products'));
     }
     public function allProduct() {
         $products = Product::all();
         $categories = Category::all();
-        return view('frontend.product.all-product', compact( 'categories','products'));
+        $title = 'All products';
+        return view('frontend.product.all-product', compact( 'categories','products','title'));
+    }
+    public function categoryProduct ($cat_id) {
+        $products = Product::where('category_id',"=",$cat_id)->get();
+        $categories = Category::all();
+        $category = Category::find($cat_id);
+        $title = $category->name;
+        return view('frontend.product.all-product', compact( 'categories','products','title'));
     }
     public function create() {
         $brands = Brand::all();
         $categories = Category::all();
         return view('backend.product.create', compact('categories','brands'));
     }
+
     public function store(Request $request) {
         $request->validate([
             'category_id'   => 'required',
@@ -56,11 +66,27 @@ class ProductController extends Controller
 
         return redirect()->back()->with('msg', 'Product Add Successfully');
     }
-    public function edit($brand_id, $cat_id) {
+    public function status($product_id) {
+        $product = Product::find($product_id);
+        $status = $product->status;
+        if(1 == $status){
+            $status = 0;
+        }
+        else{
+            $status = 1;
+        }
+        $product->status = $status;
+        $product->save();
+        return redirect()->back()->with('msg', 'Product Add Successfully');
+    }
+
+    public function edit($cat_id, $brand_id, $product_id) {
         $brand = Brand::find($brand_id);
         $category = Category::find($cat_id);
+        $product = Product::find($product_id);
         $categories = Category::all();
-        return view('backend.brand.edit', compact(['brand','category','categories']));
+        $brands = Brand::all();
+        return view('backend.product.edit', compact('brand','category','product', 'categories', 'brands'));
     }
     public function update(Request $request, $brand_id) {
         $request->validate([
@@ -78,11 +104,11 @@ class ProductController extends Controller
     }
     public function delete($product_id) {
         $product = Product::find($product_id);
-        $product_del_img = $product->image;
+        $productDeleteImage = $product->image;
         $product->delete();
-        // if (File::exists($product_del_img)) {
-        //     unlink($product_del_img);
-        // }
+        if(File::exists($productDeleteImage)){
+            unlink($productDeleteImage);
+        }
         return redirect()->back()->with('msg', 'Brand deleted Successfully');
     }
 }
