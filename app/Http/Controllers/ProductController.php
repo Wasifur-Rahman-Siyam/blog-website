@@ -88,19 +88,39 @@ class ProductController extends Controller
         $brands = Brand::all();
         return view('backend.product.edit', compact('brand','category','product', 'categories', 'brands'));
     }
-    public function update(Request $request, $brand_id) {
+    public function update(Request $request, $product_id) {
         $request->validate([
             'category_id'   => 'required',
-            'name'          => 'required|max:60'
+            'brand_id'      => 'required',
+            'name'          => 'required|max:60',
+            'price'         => 'required|max:10',
+            'description'   => 'required',
+            'image'         => 'image|mimes:jpg,png,jpeg,gif,svg'
         ],[
             'category_id.required'  => 'The category field is required',
-            'name.required'         => 'The Brand field is required.'
+            'brand_id.required'  => 'The brand field is required',
+            'name.required'         => 'The Product name field is required.'
         ]);
-        $brand = Brand::find($brand_id);
-        $brand->category_id = $request->category_id;
-        $brand->name = $request->name;
-        $brand->save();
-        return redirect()->route('brand-manage')->with('msg', 'brand Updated Successfully');
+        $product = Product::find($product_id);
+        $product->category_id = $request->category_id;
+        $product->brand_id = $request->brand_id;
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $image = $request->image;
+        if($image) {
+            $deleteImage = $product->image;
+            $folder = 'db-images/product-images/';
+            $imageName = 'product_image'.time(). '.' .$image->getClientOriginalExtension();
+            $image->move($folder, $imageName);
+            $product->image = $folder . $imageName;
+            if(File::exists($deleteImage)){
+                unlink($deleteImage);
+            }
+        }
+        $product->save();
+
+        return redirect()->route('product-manage')->with('msg', 'Product updated Successfully');
     }
     public function delete($product_id) {
         $product = Product::find($product_id);

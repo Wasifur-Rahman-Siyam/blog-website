@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\Fondend\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Models\Brand;
 use App\Models\Category;
@@ -53,6 +52,7 @@ Route::middleware([
             Route::get('/product','index')->name('product-manage');
             Route::get('/product/delete/{product_id}','delete')->name('product-delete');
             Route::get('/product/status/{product_id}','status')->name('product-status');
-            Route::get('/brand/edit/{cat_id}/{brand_id}/{product_id}', 'edit')->name('product-edit');
+            Route::get('/product/edit/{cat_id}/{brand_id}/{product_id}', 'edit')->name('product-edit');
+            Route::post('/product/update/{product_id}', 'update')->name('product-update');
         });
 });

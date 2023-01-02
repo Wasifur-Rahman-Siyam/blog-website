@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center mt-5">
             <div class="col-md-8">
-                <h1 class="mb-3">Product Add </h1>
+                <h1 class="mb-3">Product Edit </h1>
                 <script>
                     var msg = '{{Session::get('msg')}}';
                     var exist = '{{Session::has('msg')}}';
@@ -12,7 +12,7 @@
                     alert(msg);
                     }
                 </script>
-                <form action="{{route('product-store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('product-update',['product_id' => $product->id])}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <select class="form-select mb-4" aria-label="Default select example" name="category_id">
                         <option value='' disabled selected>Select Category</option>

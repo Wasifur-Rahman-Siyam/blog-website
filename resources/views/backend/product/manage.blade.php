@@ -42,7 +42,7 @@
                                 <td style="width: 100px"><img src="{{$product->image}}" alt="" style="width: 100px"></td>
                                 <td>
                                     <a href="{{route('product-status', ['product_id' => $product->id])}}" class="{{$product->status == 1 ? 'btn btn-success' : 'btn btn-primary' }}">{{$product->status == 1 ? 'Active' : 'Deactive' }}</a>
-                                    <a href="{{route('product-edit', ['cat_id' => $category->id, 'brand_id' => $brand->id, 'product_id' =>  $product->id ])}}" class="btn btn-warning">Edit</a>
+                                    <a href="{{route('product-edit', ['cat_id' => $category->id,'brand_id' => $brand->id,'product_id' =>  $product->id ])}}" class="btn btn-warning">Edit</a>
                                     <a href="{{route('product-delete', ['product_id' => $product->id])}}" class="btn btn-danger" onclick="return confirm('Are u sure delete this brand');">Delete</a>
                                 </td>
                             </tr>
